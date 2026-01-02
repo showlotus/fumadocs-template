@@ -1,45 +1,153 @@
-# ahooks-dive-docs
+# Fumadocs Template
 
-This is a Next.js application generated with
-[Create Fumadocs](https://github.com/fuma-nama/fumadocs).
+A modern documentation website template built with [Next.js](https://nextjs.org/) and [Fumadocs](https://fumadocs.dev). This template provides a fully-featured documentation site with MDX support, theme switching, and static export for GitHub Pages compatibility.
 
-Run development server:
+## Features
+
+- **MDX Support**: Write documentation in Markdown with JSX components
+- **Theme Switching**: Light and dark mode support with next-themes
+- **Code Highlighting**: Syntax highlighting with Shiki
+- **Responsive Design**: Mobile-friendly layout with Tailwind CSS
+- **TypeScript**: Full TypeScript support
+- **ESLint**: Code linting and formatting
+- **Custom Components**: Pre-built components like LinkButton, ThemeImage, ViewCode
+- **Static Export**: Built-in static site generation for GitHub Pages compatibility
+- **OG Image Generation**: Dynamic Open Graph images for social sharing
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 18+
+- pnpm (recommended) or npm/yarn
+
+### Installation
+
+1. Navigate to the project directory:
 
 ```bash
-npm run dev
-# or
-pnpm dev
-# or
-yarn dev
+cd fumadocs-template
 ```
 
-Open http://localhost:3000 with your browser to see the result.
+2. Install dependencies:
 
-## Explore
+```bash
+pnpm install
+```
 
-In the project, you can see:
+3. Run the development server:
 
-- `lib/source.ts`: Code for content source adapter, [`loader()`](https://fumadocs.dev/docs/headless/source-api) provides the interface to access your content.
-- `lib/layout.shared.tsx`: Shared options for layouts, optional but preferred to keep.
+```bash
+pnpm dev
+```
 
-| Route                     | Description                                            |
-| ------------------------- | ------------------------------------------------------ |
-| `app/(home)`              | The route group for your landing page and other pages. |
-| `app/docs`                | The documentation layout and pages.                    |
-| `app/api/search/route.ts` | The Route Handler for search.                          |
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Fumadocs MDX
+## Project Structure
 
-A `source.config.ts` config file has been included, you can customise different options like frontmatter schema.
+```
+fumadocs-template/
+├── content/
+│   └── docs/                 # Documentation content in MDX
+│       ├── index.mdx         # Homepage
+│       ├── components.mdx    # Component documentation
+│       ├── components/       # Component demos
+│       └── hooks/            # Hook documentation and demos
+├── src/
+│   ├── app/                  # Next.js app directory
+│   │   ├── (home)/           # Landing page
+│   │   ├── docs/             # Documentation pages
+│   │   ├── api/              # API routes
+│   │   ├── og/               # OG image generation
+│   │   └── global.css        # Global styles
+│   ├── components/           # Reusable UI components
+│   ├── lib/                  # Utility functions and configurations
+│   └── plugins/              # Custom remark plugins
+├── source.config.ts          # Fumadocs MDX configuration
+├── next.config.mjs           # Next.js configuration
+├── tailwind.config.mjs       # Tailwind CSS configuration
+├── eslint.config.mjs         # ESLint configuration
+└── package.json              # Dependencies and scripts
+```
 
-Read the [Introduction](https://fumadocs.dev/docs/mdx) for further details.
+## Customization
 
-## Learn More
+### Adding Documentation
 
-To learn more about Next.js and Fumadocs, take a look at the following
-resources:
+Add new MDX files to the `content/docs/` directory. The file structure will automatically generate the navigation.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Fumadocs](https://fumadocs.dev) - learn about Fumadocs
+Example frontmatter:
+
+```yaml
+---
+title: My New Page
+description: A description of this page
+---
+```
+
+### Custom Components
+
+Create reusable components in `src/components/` and import them in your MDX files.
+
+### Theme Configuration
+
+Modify themes in `source.config.ts`:
+
+```typescript
+rehypeCodeOptions: {
+  themes: {
+    light: 'your-light-theme',
+    dark: 'your-dark-theme',
+  },
+}
+```
+
+### Layout Options
+
+Customize the layout in `src/lib/layout.shared.tsx`:
+
+- Navigation links
+- Footer content
+- Theme settings
+
+## Scripts
+
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm start` - Start production server
+- `pnpm types:check` - Check TypeScript types
+- `pnpm lint` - Run ESLint
+
+## Deployment
+
+### Vercel
+
+1. Push your code to GitHub
+2. Connect your repository to [Vercel](https://vercel.com)
+3. Deploy automatically
+
+### Other Platforms
+
+This project is configured for static export, so it can be deployed to:
+
+- GitHub Pages
+- Netlify
+- Any static hosting service
+
+## Configuration Notes
+
+- **Static Export**: The project uses static export (`output: 'export'`) for GitHub Pages compatibility
+- **Output Directory**: Built files are exported to the `docs` folder
+- **Search API**: The search API route is available but currently commented out for static deployment
+- **Asset Prefix**: Configure `basePath` and `assetPrefix` in `next.config.mjs` for subpath deployments
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Resources
+
+- [Fumadocs Documentation](https://fumadocs.dev)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [MDX Documentation](https://mdxjs.com)
+- [Tailwind CSS](https://tailwindcss.com)

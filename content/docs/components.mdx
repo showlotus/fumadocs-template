@@ -1,0 +1,38 @@
+---
+title: Components
+description: Some builtin components
+---
+
+import ToggleTheme from './components/toggle-theme.tsx'
+
+## LinkButton
+
+A link button component to link url and show text.
+
+```mdx
+<LinkButton url="xx" text="Github" />
+```
+
+<LinkButton url="xx" text="Github" />
+
+## ThemeImage
+
+A image component to show different image in light and dark mode.
+
+```mdx
+<ThemeImage light="./imgs/sun.svg" dark="./imgs/moon.svg" className="w-10" />
+```
+
+click <ToggleTheme /> to toggle theme and the icon will change.
+
+<ThemeImage light="./imgs/sun.svg" dark="./imgs/moon.svg" className="w-10" />
+
+## ViewCode
+
+A component to view code.
+
+```mdx
+<ViewCode src="./components/demo.tsx" />
+```
+
+<ViewCode src="./components/demo.tsx" />

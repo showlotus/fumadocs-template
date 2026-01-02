@@ -1,3 +1,22 @@
 @import 'tailwindcss';
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
+
+.viewcode-container div[role='tabpanel'][id*='code'] figure {
+  background-color: transparent;
+}
+
+.viewcode-container .custom-code-block pre,
+.viewcode-container .custom-code-block code {
+  border: none;
+  background-color: transparent !important;
+}
+
+.viewcode-container .custom-code-block code {
+  display: flex;
+  flex-direction: column;
+}
+
+.viewcode-container .custom-code-block code .line {
+  line-height: var(--text-sm--line-height);
+}

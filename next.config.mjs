@@ -1,10 +1,21 @@
-import { createMDX } from 'fumadocs-mdx/next';
+import { createMDX } from 'fumadocs-mdx/next'
 
-const withMDX = createMDX();
+const withMDX = createMDX()
 
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
-};
+  output: 'export', // ⭐ 必须
+  distDir: 'docs',
+  images: {
+    unoptimized: true, // GitHub Pages 不支持 Image 优化
+  },
+  ...(process.env.NODE_ENV === 'production'
+    ? {
+        basePath: '/ahooks-dive', // 仓库名
+        assetPrefix: '/ahooks-dive/', // 资源路径前缀
+      }
+    : {}),
+}
 
-export default withMDX(config);
+export default withMDX(config)
