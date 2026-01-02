@@ -12,8 +12,8 @@ const config = {
   trailingSlash: true,
   ...(process.env.NODE_ENV === 'production'
     ? {
-        basePath: '/fumadocs-template', // 仓库名
-        assetPrefix: '', // 资源路径前缀
+        // basePath: '/fumadocs-template', // 仓库名
+        // assetPrefix: '', // 资源路径前缀
       }
     : {}),
 }
