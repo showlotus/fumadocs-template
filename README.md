@@ -17,7 +17,7 @@ A modern documentation website template built with [Next.js](https://nextjs.org/
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 20+
 - pnpm (recommended) or npm/yarn
 
 ### Installation
