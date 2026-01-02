@@ -1,0 +1,205 @@
+# Components
+
+
+
+
+
+
+
+
+
+import ToggleTheme from './components/toggle-theme.tsx'
+
+## LinkButton
+
+A link button component to link url and show text.
+
+```mdx
+<LinkButton url="xx" text="Github" />
+```
+
+<LinkButton url="xx" text="Github" />
+
+## ThemeImage
+
+A image component to show different image in light and dark mode.
+
+```mdx
+<ThemeImage light="./imgs/sun.svg" dark="./imgs/moon.svg" className="w-10" />
+```
+
+click <ToggleTheme /> to toggle theme and the icon will change.
+
+<ThemeImage light={ThemeImage_light_0.src} dark={ThemeImage_dark_1.src} className="w-10" />
+
+## ViewCode
+
+A component to view code.
+
+```mdx
+<ViewCode src="./components/demo.tsx" />
+```
+
+<ViewCode component={<ViewCodeComponent_0 />} code={"'use client'\n\nimport ThemeToggle from './toggle-theme'\n\nexport default function Demo() {\n  return (\n    <div className=\"flex flex-col gap-2\">\n      <div>This is a Demo</div>\n      <div>\n        click <ThemeToggle /> to toggle theme and the icon will change.\n      </div>\n    </div>\n  )\n}\n"} />
+
+
+# Hello World
+
+
+
+Welcome to the docs! You can start writing documents in `/content/docs`.
+
+## What is Next?
+
+<Cards>
+  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
+
+  <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
+</Cards>
+
+
+# useLatest
+
+
+
+
+
+
+
+
+
+
+
+<LinkButton url="https://ahooks.js.org/zh-CN/hooks/use-latest#uselatest" text="ahooks" />
+
+<LinkButton url="https://github.com/alibaba/hooks/blob/master/packages/hooks/src/useLatest/index.ts" text="Github" />
+
+## 用法
+
+<ViewCode component={<ViewCodeComponent_0 />} code={"'use client'\n\nimport { useState, useEffect } from 'react'\nimport { useLatest } from 'ahooks'\n\nexport default function Demo1() {\n  const [useLatestCount, setUseLatestCount] = useState(0)\n  const [defaultCount, setDefaultCount] = useState(0)\n\n  const latestCountRef = useLatest(useLatestCount)\n\n  useEffect(() => {\n    const interval = setInterval(() => {\n      setUseLatestCount(latestCountRef.current + 1)\n    }, 1000)\n    return () => clearInterval(interval)\n  }, []) /* eslint-disable-line react-hooks/exhaustive-deps */\n\n  useEffect(() => {\n    const interval = setInterval(() => {\n      setDefaultCount(defaultCount + 1)\n    }, 1000)\n    return () => clearInterval(interval)\n  }, []) /* eslint-disable-line react-hooks/exhaustive-deps */\n\n  return (\n    <>\n      <p>count(useLatest): {useLatestCount}</p>\n      <p>count(default): {defaultCount}</p>\n    </>\n  )\n}\n"} />
+
+为什么 `demo.tsx` 中为什么 `defaultCount` 没有更新？
+
+这是一个典型的 React 闭包问题，由于 `useEffect` 在组件挂载后只会执行一次，且 `setInterval` 中的回调函数内部始终是对第一次初始化时的 `defaultCount` 进行引用，也就意味着 `setInterval` 的回调函数中获取到的 `defaultCount` 一直都是 `0`。
+
+如果将 `setDefaultCount` 传入一个更新函数，那么就能解决这个问题。
+
+<CodeBlockTabs defaultValue="demo.tsx">
+  <CodeBlockTabsList>
+    <CodeBlockTabsTrigger value="demo.tsx">
+      demo.tsx
+    </CodeBlockTabsTrigger>
+  </CodeBlockTabsList>
+
+  <CodeBlockTab value="demo.tsx">
+    ```tsx
+    import React, { useState, useEffect } from 'react'
+
+    export default () => {
+      const [defaultCount, setDefaultCount] = useState(0)
+
+      useEffect(() => {
+        const interval = setInterval(() => {
+          setDefaultCount(count => count + 1) // [!code highlight]
+        }, 1000)
+        return () => clearInterval(interval)
+      }, [])
+
+      return (
+        <>
+          <p>count(default): {defaultCount}</p>
+        </>
+      )
+    }
+    ```
+  </CodeBlockTab>
+</CodeBlockTabs>
+
+<ViewCode component={<ViewCodeComponent_1 />} code={"'use client'\n\nimport { useState, useEffect } from 'react'\n\nexport default function Demo2() {\n  const [defaultCount, setDefaultCount] = useState(0)\n\n  useEffect(() => {\n    const interval = setInterval(() => {\n      setDefaultCount(count => count + 1)\n    }, 1000)\n    return () => clearInterval(interval)\n  }, [])\n\n  return (\n    <>\n      <p>count(default): {defaultCount}</p>\n    </>\n  )\n}\n"} />
+
+## 源码
+
+```ts title="useLatest.ts"
+import { useRef } from 'react'
+
+function useLatest<T>(value: T) {
+  const ref = useRef(value)
+  ref.current = value
+
+  return ref
+}
+
+export default useLatest
+```
+
+## 解读
+
+使用 `useRef` 定义一个 `ref` 对象，将入参赋值给 `ref` 对象，然后返回这个 `ref` 对象。相较于 `useRef`，多了一行赋值的代码，确保每次获取的值都是最新的
+
+<CodeBlockTabs defaultValue="useLatest.ts">
+  <CodeBlockTabsList>
+    <CodeBlockTabsTrigger value="useLatest.ts">
+      useLatest.ts
+    </CodeBlockTabsTrigger>
+
+    <CodeBlockTabsTrigger value="demo.tsx">
+      demo.tsx
+    </CodeBlockTabsTrigger>
+  </CodeBlockTabsList>
+
+  <CodeBlockTab value="useLatest.ts">
+    ```ts
+    import { useRef } from 'react'
+
+    function useLatest<T>(value: T) {
+      const ref = useRef(value)
+      ref.current = value // [!code highlight]
+
+      return ref
+    }
+
+    export default useLatest
+    ```
+  </CodeBlockTab>
+
+  <CodeBlockTab value="demo.tsx">
+    ```tsx
+    import React, { useState, useEffect, useRef } from 'react'
+    import { useLatest } from 'ahooks'
+
+    export default () => {
+      const [useLatestCount, setUseLatestCount] = useState(0)
+      const [defaultCount, setDefaultCount] = useState(0)
+
+      const latestCountRef = useLatest(useLatestCount)
+
+      useEffect(() => {
+        const interval = setInterval(() => {
+          setUseLatestCount(latestCountRef.current + 1)
+        }, 1000)
+        return () => clearInterval(interval)
+      }, [])
+
+      useEffect(() => {
+        const interval = setInterval(() => {
+          setDefaultCount(defaultCount + 1)
+        }, 1000)
+        return () => clearInterval(interval)
+      }, [])
+
+      return (
+        <>
+          <p>count(useLatest): {useLatestCount}</p>
+          <p>count(default): {defaultCount}</p>
+        </>
+      )
+    }
+    ```
+  </CodeBlockTab>
+</CodeBlockTabs>
+
+因为使用 `useRef` 定义的变量，React 会记录在当前组件内部，在组件重新渲染时，不会再被初始化，而是使用当前组件内部记录的值。
+
+而每次重新渲染时，当前组件内部上下文中拿到的都是每个 `state` 最新的值，`useLatest` 相当于更新了一下 `useRef` 定义的值，保证当前 `ref` 对象是最新的值。
+
+<ThemeImage light={ThemeImage_light_0.src} dark={ThemeImage_dark_1.src} />
