@@ -1,7 +1,12 @@
 self.__BUILD_MANIFEST = {
   "__rewrites": {
     "afterFiles": [],
-    "beforeFiles": [],
+    "beforeFiles": [
+      {
+        "source": "/fumadocs-template//_next/:path+",
+        "destination": "/fumadocs-template/_next/:path+"
+      }
+    ],
     "fallback": []
   },
   "sortedPages": [
