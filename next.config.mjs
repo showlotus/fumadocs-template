@@ -6,10 +6,10 @@ const withMDX = createMDX()
 const config = {
   reactStrictMode: true,
   output: 'export', // ⭐ 必须
-  distDir: 'docs',
   images: {
     unoptimized: true, // GitHub Pages 不支持 Image 优化
   },
+  trailingSlash: true,
   ...(process.env.NODE_ENV === 'production'
     ? {
         basePath: '/fumadocs-template', // 仓库名
