@@ -12,7 +12,6 @@ A modern documentation website template built with [Next.js](https://nextjs.org/
 - **ESLint**: Code linting and formatting
 - **Custom Components**: Pre-built components like LinkButton, ThemeImage, ViewCode
 - **Static Export**: Built-in static site generation for GitHub Pages compatibility
-- **OG Image Generation**: Dynamic Open Graph images for social sharing
 
 ## Quick Start
 

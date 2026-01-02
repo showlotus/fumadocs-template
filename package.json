@@ -1,7 +1,29 @@
 {
   "name": "fumadocs-template",
   "version": "0.1.0",
+  "description": "A modern documentation website template built with Next.js and Fumadocs",
   "private": true,
+  "packageManager": "pnpm@8.15.4",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/showlotus/fumadocs-template.git"
+  },
+  "homepage": "https://github.com/showlotus/fumadocs-template",
+  "bugs": {
+    "url": "https://github.com/showlotus/fumadocs-template/issues"
+  },
+  "author": "showlotus",
+  "license": "MIT",
+  "keywords": [
+    "fumadocs",
+    "next.js",
+    "documentation",
+    "mdx",
+    "template"
+  ],
   "scripts": {
     "build": "next build",
     "dev": "next dev",
