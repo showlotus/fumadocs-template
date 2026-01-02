@@ -43,21 +43,6 @@ A component to view code.
 <ViewCode component={<ViewCodeComponent_0 />} code={"'use client'\n\nimport ThemeToggle from './toggle-theme'\n\nexport default function Demo() {\n  return (\n    <div className=\"flex flex-col gap-2\">\n      <div>This is a Demo</div>\n      <div>\n        click <ThemeToggle /> to toggle theme and the icon will change.\n      </div>\n    </div>\n  )\n}\n"} />
 
 
-# Hello World
-
-
-
-Welcome to the docs! You can start writing documents in `/content/docs`.
-
-## What is Next?
-
-<Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
-</Cards>
-
-
 # useLatest
 
 
