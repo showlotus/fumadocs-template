@@ -24,21 +24,21 @@ A modern documentation website template built with [Next.js](https://nextjs.org/
 
 1. Navigate to the project directory:
 
-```bash
-cd fumadocs-template
-```
+   ```bash
+   cd fumadocs-template
+   ```
 
 2. Install dependencies:
 
-```bash
-pnpm install
-```
+   ```bash
+   pnpm install
+   ```
 
 3. Run the development server:
 
-```bash
-pnpm dev
-```
+   ```bash
+   pnpm dev
+   ```
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
