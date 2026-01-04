@@ -10,6 +10,14 @@ const config = {
     unoptimized: true, // GitHub Pages 不支持 Image 优化
   },
   trailingSlash: true,
+  turbopack: {
+    rules: {
+      '*.txt': {
+        loaders: ['raw-loader'],
+        as: '*.js',
+      },
+    },
+  },
   ...(process.env.NODE_ENV === 'production'
     ? {
         basePath: '/fumadocs-template', // 仓库名

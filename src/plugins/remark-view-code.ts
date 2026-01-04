@@ -113,7 +113,40 @@ function generateJsxAttribute(name: string, componentName: string) {
   }
 }
 
-export function remarkViewCode() {
+/**
+ * 生成表达式类型
+ * @param name 属性名
+ * @param value 表达式变量名
+ * @returns
+ */
+function generateExpressionAttribute(name: string, value: string) {
+  return {
+    type: 'mdxJsxAttribute',
+    name,
+    value: {
+      type: 'mdxJsxAttributeValueExpression',
+      value: value,
+      data: {
+        estree: {
+          type: 'Program',
+          sourceType: 'module',
+          body: [
+            {
+              type: 'ExpressionStatement',
+              expression: {
+                type: 'Identifier',
+                name: value,
+              },
+            },
+          ],
+        },
+      },
+    },
+  }
+}
+
+export function remarkViewCode(options?: { root?: string }) {
+  const { root = process.cwd() } = options ?? {}
   return (tree: any, file: any) => {
     const dir = path.dirname(file.path)
     visit(tree, 'mdxJsxFlowElement', (node: any) => {
@@ -138,8 +171,22 @@ export function remarkViewCode() {
       node.attributes.push(generateJsxAttribute('component', varName))
 
       // 注入组件源码
-      const code = fs.readFileSync(absolutePath, { encoding: 'utf-8' })
-      node.attributes.push(generateStringAttribute('code', JSON.stringify(code)))
+      const CACHE_DIR = 'node_modules/.view-code-cache'
+      const cacheDir = path.resolve(root, CACHE_DIR)
+      if (!fs.existsSync(cacheDir)) {
+        fs.mkdirSync(cacheDir, { recursive: true })
+      }
+      const cacheFileName = path.basename(absolutePath).replace(/\.[^/.]+$/, '') + '.txt'
+      const cacheFilePath = path.resolve(cacheDir, cacheFileName)
+      const relativeCacheDirPath = path.relative(dir, cacheDir)
+      if (fs.existsSync(cacheFilePath)) {
+        fs.rmSync(cacheFilePath)
+      }
+      fs.linkSync(absolutePath, cacheFilePath)
+      const sourceCodePath = path.join(relativeCacheDirPath, cacheFileName)
+      const sourceCodeName = `${displayName}ComponentSourceCode_${index++}`
+      tree.children.unshift(generateImport(sourceCodeName, sourceCodePath))
+      node.attributes.push(generateExpressionAttribute('code', sourceCodeName))
     })
   }
 }
