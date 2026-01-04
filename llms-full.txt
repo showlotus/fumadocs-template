@@ -8,6 +8,8 @@
 
 
 
+
+
 import ToggleTheme from './components/toggle-theme.tsx'
 
 ## LinkButton
@@ -40,10 +42,14 @@ A component to view code.
 <ViewCode src="./components/demo.tsx" />
 ```
 
-<ViewCode component={<ViewCodeComponent_0 />} code={"'use client'\n\nimport ThemeToggle from './toggle-theme'\n\nexport default function Demo() {\n  return (\n    <div className=\"flex flex-col gap-2\">\n      <div>This is a Demo</div>\n      <div>\n        click <ThemeToggle /> to toggle theme and the icon will change.\n      </div>\n    </div>\n  )\n}\n"} />
+<ViewCode component={<ViewCodeComponent_0 />} code={ViewCodeComponentSourceCode_1} />
 
 
 # useLatest
+
+
+
+
 
 
 
@@ -61,7 +67,7 @@ A component to view code.
 
 ## 用法
 
-<ViewCode component={<ViewCodeComponent_0 />} code={"'use client'\n\nimport { useState, useEffect } from 'react'\nimport { useLatest } from 'ahooks'\n\nexport default function Demo1() {\n  const [useLatestCount, setUseLatestCount] = useState(0)\n  const [defaultCount, setDefaultCount] = useState(0)\n\n  const latestCountRef = useLatest(useLatestCount)\n\n  useEffect(() => {\n    const interval = setInterval(() => {\n      setUseLatestCount(latestCountRef.current + 1)\n    }, 1000)\n    return () => clearInterval(interval)\n  }, []) /* eslint-disable-line react-hooks/exhaustive-deps */\n\n  useEffect(() => {\n    const interval = setInterval(() => {\n      setDefaultCount(defaultCount + 1)\n    }, 1000)\n    return () => clearInterval(interval)\n  }, []) /* eslint-disable-line react-hooks/exhaustive-deps */\n\n  return (\n    <>\n      <p>count(useLatest): {useLatestCount}</p>\n      <p>count(default): {defaultCount}</p>\n    </>\n  )\n}\n"} />
+<ViewCode component={<ViewCodeComponent_0 />} code={ViewCodeComponentSourceCode_1} />
 
 为什么 `demo.tsx` 中为什么 `defaultCount` 没有更新？
 
@@ -100,7 +106,7 @@ A component to view code.
   </CodeBlockTab>
 </CodeBlockTabs>
 
-<ViewCode component={<ViewCodeComponent_1 />} code={"'use client'\n\nimport { useState, useEffect } from 'react'\n\nexport default function Demo2() {\n  const [defaultCount, setDefaultCount] = useState(0)\n\n  useEffect(() => {\n    const interval = setInterval(() => {\n      setDefaultCount(count => count + 1)\n    }, 1000)\n    return () => clearInterval(interval)\n  }, [])\n\n  return (\n    <>\n      <p>count(default): {defaultCount}</p>\n    </>\n  )\n}\n"} />
+<ViewCode component={<ViewCodeComponent_2 />} code={ViewCodeComponentSourceCode_3} />
 
 ## 源码
 
