@@ -18,7 +18,6 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
         <MDX
-          // TAG register some global components and use them in mdx
           components={getMDXComponents({
             // this allows you to link to other pages with relative file paths
             a: createRelativeLink(source, page),

@@ -12,7 +12,7 @@ const config = {
   trailingSlash: true,
   turbopack: {
     rules: {
-      '*.txt': {
+      '*.tsx.virtual': {
         loaders: ['raw-loader'],
         as: '*.js',
       },

@@ -171,12 +171,13 @@ export function remarkViewCode(options?: { root?: string }) {
       node.attributes.push(generateJsxAttribute('component', varName))
 
       // 注入组件源码
-      const CACHE_DIR = 'node_modules/.view-code-cache'
+      const CACHE_DIR = '.dev/view-code-cache'
       const cacheDir = path.resolve(root, CACHE_DIR)
       if (!fs.existsSync(cacheDir)) {
         fs.mkdirSync(cacheDir, { recursive: true })
       }
-      const cacheFileName = path.basename(absolutePath).replace(/\.[^/.]+$/, '') + '.txt'
+      const cacheFileName =
+        path.basename(absolutePath).replace(/\.[^/.]+$/, '') + '.tsx.virtual'
       const cacheFilePath = path.resolve(cacheDir, cacheFileName)
       const relativeCacheDirPath = path.relative(dir, cacheDir)
       if (fs.existsSync(cacheFilePath)) {

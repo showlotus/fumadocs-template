@@ -7,7 +7,9 @@ import { LinkButton } from './components/link-button'
 import { GithubButton } from './components/github-button'
 import { ThemeImage } from './components/theme-image'
 import { ViewCode } from './components/view-code'
+import { CodeBlock } from './components/code-block'
 
+// TAG register some global components and use them in mdx
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
     ...defaultMdxComponents,
@@ -18,5 +20,6 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     GithubButton,
     ThemeImage,
     ViewCode,
+    CodeBlock,
   }
 }

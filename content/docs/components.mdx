@@ -10,10 +10,16 @@ import ToggleTheme from './components/toggle-theme.tsx'
 A link button component to link url and show text.
 
 ```mdx
-<LinkButton url="https://github.com/showlotus/fumadocs-template" text="Github" />
+<LinkButton
+  url="https://github.com/showlotus/fumadocs-template"
+  text="Github"
+/>
 ```
 
-<LinkButton url="https://github.com/showlotus/fumadocs-template" text="Github" />
+<LinkButton
+  url="https://github.com/showlotus/fumadocs-template"
+  text="Github"
+/>
 
 ## ThemeImage
 
@@ -27,6 +33,40 @@ click <ToggleTheme /> to toggle theme and the icon will change.
 
 <ThemeImage light="./imgs/sun.svg" dark="./imgs/moon.svg" className="w-10" />
 
+## CodeBlock
+
+A component to show code block. 
+
+```mdx
+<CodeBlock lang="tsx" code={`'use client'
+
+import Demo from './components/demo.tsx'
+
+export default function Foo() {
+    return <div>This is a Foo with <Demo /></div>
+}`} />
+```
+
+<CodeBlock lang="tsx" code={`'use client'
+
+import Demo from './components/demo.tsx'
+
+export default function Foo() {
+    return <div>This is a Foo with <Demo /></div>
+}`} />
+
+It's the same as:
+
+<CodeBlock lang="tsx" code={`\`\`\`mdx
+'use client'
+
+import Demo from './components/demo.tsx'
+
+export default function Foo() {
+    return <div>This is a Foo with <Demo /></div>
+}
+\`\`\``} />
+
 ## ViewCode
 
 A component to view code.
@@ -36,3 +76,26 @@ A component to view code.
 ```
 
 <ViewCode src="./components/demo.tsx" />
+
+or use `view-code` keyword to inject the code block.
+
+
+<CodeBlock lang="tsx" code={`\`\`\`mdx view-code
+'use client'
+
+import Demo from './components/demo.tsx'
+
+export default function Foo() {
+    return <div>This is a Foo with <Demo /></div>
+}
+\`\`\``} />
+
+```mdx view-code
+'use client'
+
+import Demo from './components/demo.tsx'
+
+export default function Foo() {
+  return <div>This is a Foo with <Demo /></div>
+}
+```

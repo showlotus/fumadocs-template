@@ -10,7 +10,7 @@ A modern documentation website template built with [Next.js](https://nextjs.org/
 - **Responsive Design**: Mobile-friendly layout with Tailwind CSS
 - **TypeScript**: Full TypeScript support
 - **ESLint**: Code linting and formatting
-- **Custom Components**: Pre-built components like LinkButton, ThemeImage, ViewCode
+- **Custom Components**: Pre-built components like LinkButton, ThemeImage, CodeBlock, ViewCode
 - **Static Export**: Built-in static site generation for GitHub Pages compatibility
 
 ## Quick Start
