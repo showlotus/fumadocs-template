@@ -1,149 +1,14 @@
 import path from 'node:path'
 import fs from 'node:fs'
 import { visit } from 'unist-util-visit'
-import { valueToEstree } from 'estree-util-value-to-estree'
 import { displayName } from '@/components/view-code'
+import {
+  generateImport,
+  generateJsxAttribute,
+  generateExpressionAttribute,
+} from '@/lib/ast'
 
 let index = 0
-
-/**
- * 生成 import
- * @param name 模块名
- * @param value 导入路径
- * @returns
- */
-function generateImport(name: string, value: string) {
-  return {
-    type: 'mdxjsEsm',
-    data: {
-      estree: {
-        type: 'Program',
-        sourceType: 'module',
-        body: [
-          {
-            type: 'ImportDeclaration',
-            source: valueToEstree(value),
-            specifiers: [
-              {
-                type: 'ImportDefaultSpecifier',
-                local: {
-                  type: 'Identifier',
-                  name: name,
-                },
-              },
-            ],
-          },
-        ],
-      },
-    },
-  }
-}
-
-/**
- * 生成字符串类型
- * @param name 属性名
- * @param value 属性值
- * @returns
- */
-function generateStringAttribute(name: string, value: string) {
-  return {
-    type: 'mdxJsxAttribute',
-    name: name,
-    value: {
-      type: 'mdxJsxAttributeValueExpression',
-      value: value,
-      data: {
-        estree: {
-          type: 'Program',
-          sourceType: 'module',
-          body: [
-            {
-              type: 'ExpressionStatement',
-              expression: {
-                type: 'Identifier',
-                name: value,
-              },
-            },
-          ],
-        },
-      },
-    },
-  }
-}
-
-/**
- *
- * @param name 属性名
- * @param componentName 组件名
- * @returns
- */
-function generateJsxAttribute(name: string, componentName: string) {
-  return {
-    type: 'mdxJsxAttribute',
-    name,
-    value: {
-      type: 'mdxJsxAttributeValueExpression',
-      value: `<${componentName} />`,
-      data: {
-        estree: {
-          type: 'Program',
-          sourceType: 'module',
-          body: [
-            {
-              type: 'ExpressionStatement',
-              expression: {
-                type: 'JSXElement',
-                openingElement: {
-                  type: 'JSXOpeningElement',
-                  name: {
-                    type: 'JSXIdentifier',
-                    name: componentName,
-                  },
-                  attributes: [],
-                  selfClosing: true,
-                },
-                closingElement: null,
-                children: [],
-              },
-            },
-          ],
-        },
-      },
-    },
-  }
-}
-
-/**
- * 生成表达式类型
- * @param name 属性名
- * @param value 表达式变量名
- * @returns
- */
-function generateExpressionAttribute(name: string, value: string) {
-  return {
-    type: 'mdxJsxAttribute',
-    name,
-    value: {
-      type: 'mdxJsxAttributeValueExpression',
-      value: value,
-      data: {
-        estree: {
-          type: 'Program',
-          sourceType: 'module',
-          body: [
-            {
-              type: 'ExpressionStatement',
-              expression: {
-                type: 'Identifier',
-                name: value,
-              },
-            },
-          ],
-        },
-      },
-    },
-  }
-}
 
 export function remarkViewCode(options?: { root?: string }) {
   const { root = process.cwd() } = options ?? {}
@@ -153,7 +18,7 @@ export function remarkViewCode(options?: { root?: string }) {
       if (node.name !== displayName) return
 
       const srcAttr = node.attributes.find(
-        (a: any) => a.type === 'mdxJsxAttribute' && a.name === 'src',
+        (a: any) => a.type === 'mdxJsxAttribute' && a.name === 'src'
       )
       if (!srcAttr || typeof srcAttr.value !== 'string') return
 

@@ -34,8 +34,6 @@
   },
   "dependencies": {
     "ahooks": "^3.9.6",
-    "estree-util-build-jsx": "^3.0.1",
-    "estree-util-value-to-estree": "^3.5.0",
     "fumadocs-core": "16.4.2",
     "fumadocs-mdx": "14.2.4",
     "fumadocs-ui": "16.4.2",
@@ -48,6 +46,7 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
+    "@babel/types": "^7.28.5",
     "@tailwindcss/postcss": "^4.1.18",
     "@types/mdx": "^2.0.13",
     "@types/node": "^24.10.2",
