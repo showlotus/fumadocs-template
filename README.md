@@ -1,5 +1,7 @@
 # Fumadocs Template
 
+<center>English | <a href="README-zh.md">简体中文</a></center>
+
 A modern documentation website template built with [Next.js](https://nextjs.org/) and [Fumadocs](https://fumadocs.dev). This template provides a fully-featured documentation site with MDX support, theme switching, and static export for GitHub Pages compatibility.
 
 ## Features
@@ -22,25 +24,31 @@ A modern documentation website template built with [Next.js](https://nextjs.org/
 
 ### Installation
 
-1. Navigate to the project directory:
+1. Clone the repo:
+
+   ```bash
+   git clone https://github.com/showlotus/fumadocs-template.git
+   ```
+
+2. Navigate to the project directory:
 
    ```bash
    cd fumadocs-template
    ```
 
-2. Install dependencies:
+3. Install dependencies:
 
    ```bash
    pnpm install
    ```
 
-3. Run the development server:
+4. Run the development server:
 
    ```bash
    pnpm dev
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Project Structure
 
@@ -51,7 +59,6 @@ fumadocs-template/
 │       ├── index.mdx         # Homepage
 │       ├── components.mdx    # Component documentation
 │       ├── components/       # Component demos
-│       └── hooks/            # Hook documentation and demos
 ├── src/
 │   ├── app/                  # Next.js app directory
 │   │   ├── (home)/           # Landing page
