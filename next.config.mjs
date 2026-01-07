@@ -1,5 +1,5 @@
 import { createMDX } from 'fumadocs-mdx/next'
-import { withBasePath } from './src/lib/env.ts'
+import { withBasePath } from './src/lib/env.mjs'
 
 const withMDX = createMDX()
 

@@ -15,7 +15,7 @@ import { useDocsSearch } from 'fumadocs-core/search/client'
 import { create } from '@orama/orama'
 import { createTokenizer } from '@orama/tokenizers/mandarin'
 import { useI18n } from 'fumadocs-ui/contexts/i18n'
-import { withBasePath } from '@/lib/env'
+import { withBasePath } from '@/lib/env.mjs'
 
 function initOrama(locale?: string) {
   return create({
