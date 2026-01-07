@@ -1,26 +1,46 @@
 import path from 'node:path'
-import { init, parse } from 'es-module-lexer'
+import ts from 'typescript'
 
-export async function rewriteImportsInCode(code: string, importerFile: string, targetFile: string) {
-  await init
+export function rewriteImportSource(
+  code: string,
+  importerFile: string,
+  targetFile: string,
+): string {
+  const sourceFile = ts.createSourceFile(
+    importerFile,
+    code,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TSX,
+  )
 
-  const [imports] = parse(code)
+  // @ts-ignore
+  const transformer: ts.TransformerFactory<ts.SourceFile> = ctx => {
+    const visit: ts.Visitor = node => {
+      // import ... from 'x'
+      if (ts.isImportDeclaration(node) && ts.isStringLiteral(node.moduleSpecifier)) {
+        const oldSource = node.moduleSpecifier.text
+        const newSource = formatImportPath(importerFile, oldSource, targetFile)
 
-  let result = ''
-  let lastIndex = 0
+        if (newSource !== oldSource) {
+          return ts.factory.updateImportDeclaration(
+            node,
+            node.modifiers,
+            node.importClause,
+            ts.factory.createStringLiteral(newSource),
+            node.assertClause,
+          )
+        }
+      }
 
-  for (const imp of imports) {
-    const raw = code.slice(imp.s, imp.e)
-    const formatted = formatImportPath(importerFile, raw, targetFile)
+      return ts.visitEachChild(node, visit, ctx)
+    }
 
-    result += code.slice(lastIndex, imp.s)
-    result += formatted
-    lastIndex = imp.e
+    return node => ts.visitNode(node, visit)
   }
 
-  result += code.slice(lastIndex)
-
-  return result
+  const result = ts.transform(sourceFile, [transformer])
+  return ts.createPrinter().printFile(result.transformed[0])
 }
 
 function formatImportPath(importerFile: string, importSource: string, targetFile: string) {
@@ -42,18 +62,3 @@ function formatImportPath(importerFile: string, importSource: string, targetFile
 
   return next.replace(/\\/g, '/')
 }
-
-const root = process.cwd()
-
-const importer = path.resolve(root, 'content/docs/components.mdx')
-const target = path.resolve(root, '.dev/view-code-cache/temps/component.tsx')
-
-const code = `
-import ToggleTheme from './components/toggle-theme.tsx'
-import ToggleTheme from './components/toggle-theme'
-
-
-export function Foo() {}`
-
-const result = await rewriteImportsInCode(code, importer, target)
-console.log(result)

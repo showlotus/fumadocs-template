@@ -13,7 +13,6 @@ export function CodeBlock(props: { lang: string; code: string }) {
 
   useEffect(() => {
     if (!code) return
-    console.log('code', code)
     codeToHtml(code, {
       lang,
       theme,

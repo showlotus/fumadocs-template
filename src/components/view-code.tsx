@@ -10,7 +10,7 @@ export function ViewCode(props: {
 }) {
   const { code, component } = props
   return (
-    <div className="viewcode-container">
+    <div className="view-code-container">
       <Tabs items={['View', 'Code']} defaultIndex={0}>
         <Tab value="View">
           <>{component}</>

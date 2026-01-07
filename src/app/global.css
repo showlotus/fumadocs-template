@@ -3,7 +3,7 @@
 @import 'fumadocs-ui/css/preset.css';
 
 /* 设置 Tab 下的 Code 面板的背景色 */
-.viewcode-container div[role='tabpanel'][id*='code'] figure {
+.view-code-container div[role='tabpanel'][id*='code'] figure {
   background-color: transparent;
 }
 
