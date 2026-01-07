@@ -1,5 +1,5 @@
 export const withBasePath = originalPath => {
   return (
-    process.env.ENV === 'production' ? '/fumadocs-template' + originalPath : originalPath
+    process.env.NODE_ENV === 'production' ? '/fumadocs-template' + originalPath : originalPath
   ).replace(/\/\//g, '/')
 }
