@@ -14,17 +14,13 @@ export function ThemeImage({
   dark: string
   className?: string
 }) {
-  const { theme, resolvedTheme } = useTheme()
+  const { resolvedTheme } = useTheme()
   const [imgSrc, setImgSrc] = useState('')
 
   useEffect(() => {
-    if (theme === 'system') {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setImgSrc(resolvedTheme === 'dark' ? dark : light)
-    } else {
-      setImgSrc(theme === 'dark' ? dark : light)
-    }
-  }, [theme, light, dark, resolvedTheme])
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setImgSrc(resolvedTheme === 'dark' ? dark : light)
+  }, [light, dark, resolvedTheme])
 
   return (
     imgSrc && (
