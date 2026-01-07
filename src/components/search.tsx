@@ -15,9 +15,9 @@ import { useDocsSearch } from 'fumadocs-core/search/client'
 import { create } from '@orama/orama'
 import { createTokenizer } from '@orama/tokenizers/mandarin'
 import { useI18n } from 'fumadocs-ui/contexts/i18n'
+import { withBasePath } from '@/lib/env'
 
 function initOrama(locale?: string) {
-  console.log('locale', locale)
   return create({
     schema: { _: 'string' },
     // https://docs.orama.com/docs/orama-js/supported-languages
@@ -34,6 +34,7 @@ export default function DefaultSearchDialog(props: SharedProps) {
     type: 'static',
     initOrama,
     locale,
+    from: withBasePath('/api/search'),
   })
 
   return (

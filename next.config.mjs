@@ -1,4 +1,5 @@
 import { createMDX } from 'fumadocs-mdx/next'
+import { withBasePath } from './src/lib/env.ts'
 
 const withMDX = createMDX()
 
@@ -20,8 +21,8 @@ const config = {
   },
   ...(process.env.NODE_ENV === 'production'
     ? {
-        basePath: '/fumadocs-template', // 仓库名
-        assetPrefix: '/fumadocs-template/', // 资源路径前缀
+        basePath: withBasePath('/'), // 仓库名
+        assetPrefix: withBasePath('/'), // 资源路径前缀
       }
     : {}),
 }
