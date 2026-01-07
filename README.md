@@ -1,8 +1,8 @@
-# Fumadocs Template
-
-<center>English | <a href="README-zh.md">简体中文</a></center>
-
-A modern documentation website template built with [Next.js](https://nextjs.org/) and [Fumadocs](https://fumadocs.dev). This template provides a fully-featured documentation site with MDX support, theme switching, and static export for GitHub Pages compatibility.
+<div align="center">
+   <h1>Fumadocs Template</h1>
+   <p align="center">English | <a href="README-zh.md">简体中文</a></p>
+   <p><em>A modern documentation website template built with <a href="https://nextjs.org/">Next.js</a> and <a href="https://fumadocs.dev/">Fumadocs</a></em></p>
+</div>
 
 ## Features
 

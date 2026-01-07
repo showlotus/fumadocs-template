@@ -1,8 +1,8 @@
-# Fumadocs 模板
-
-<center><a href="README.md">English</a> | 简体中文</center>
-
-这是一个使用 [Next.js](https://nextjs.org/) 和 [Fumadocs](https://fumadocs.dev) 构建的现代文档网站模板。该模板提供了完整功能的文档站点，支持 MDX、主题切换，并可静态导出以兼容 GitHub Pages。
+<div align="center">
+   <h1>Fumadocs Template</h1>
+   <p align="center"><a href="README.md">English</a> | 简体中文</p>
+   <p><em>这是一个使用 <a href="https://nextjs.org/">Next.js</a> 和 <a href="https://fumadocs.dev/">Fumadocs</a> 构建的现代文档网站模板</em></p>
+</div>
 
 ## 特性
 
