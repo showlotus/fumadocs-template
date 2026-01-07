@@ -18,7 +18,7 @@ import { useI18n } from 'fumadocs-ui/contexts/i18n'
 import { withBasePath } from '@/lib/env.mjs'
 
 function initOrama(locale?: string) {
-  return create({
+  const res = create({
     schema: { _: 'string' },
     // https://docs.orama.com/docs/orama-js/supported-languages
     language: 'english',
@@ -26,6 +26,8 @@ function initOrama(locale?: string) {
     //   tokenizer: createTokenizer(),
     // },
   })
+  console.log('res', res)
+  return res
 }
 
 export default function DefaultSearchDialog(props: SharedProps) {
