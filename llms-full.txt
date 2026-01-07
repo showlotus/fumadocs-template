@@ -1,3 +1,133 @@
+# 组件
+
+
+
+
+
+
+
+
+
+
+
+
+
+import ToggleTheme from './components/toggle-theme.tsx'
+
+## LinkButton
+
+链接按钮组件，用于链接 URL 并显示文本。
+
+```mdx
+<LinkButton url="https://github.com/showlotus/fumadocs-template" text="Github" />
+```
+
+<LinkButton url="https://github.com/showlotus/fumadocs-template" text="Github" />
+
+## ThemeImage
+
+图片组件，用于在亮色和暗色模式下显示不同的图片。
+
+```mdx
+<ThemeImage light="./imgs/sun.svg" dark="./imgs/moon.svg" className="w-10" />
+```
+
+点击 <ToggleTheme /> 切换主题，图标会随之变化。
+
+<ThemeImage light={ThemeImage_light_0.src} dark={ThemeImage_dark_1.src} className="w-10" />
+
+## CodeBlock
+
+代码块组件，用于显示代码块。
+
+{/* prettier-ignore */}
+
+```mdx
+<CodeBlock lang="tsx" code={`'use client'
+
+import Demo from './components/demo.tsx'
+
+export default function Foo() {
+    return <div>This is a Foo with <Demo /></div>
+}`} />
+```
+
+<CodeBlock
+  lang="tsx"
+  code={`'use client'
+
+import Demo from './components/demo.tsx'
+
+export default function Foo() {
+  return <div>This is a Foo with <Demo /></div>
+}`}
+/>
+
+与下面的代码块相同：
+
+<CodeBlock
+  lang="tsx"
+  code={`\`\`\`mdx
+'use client'
+
+import Demo from './components/demo.tsx'
+
+export default function Foo() {
+  return <div>This is a Foo with <Demo /></div>
+}
+\`\`\``}
+/>
+
+## ViewCode
+
+既能渲染指定组件也能查看其源代码的组件。
+
+```mdx
+<ViewCode src="./components/demo.tsx" />
+```
+
+<ViewCode component={<ViewCodeComponent_0 />} code={ViewCodeComponentSourceCode_1} />
+
+或者使用 `view-code` 关键字来注入到代码块中：
+
+<CodeBlock
+  lang="tsx"
+  code={`\`\`\`mdx view-code
+'use client'
+
+import Demo from './components/demo.tsx'
+
+export default function Foo() {
+  return (
+    <div className="border-4 border-solid rounded p-2">This is a Foo 
+      <div className='border-4 border-solid rounded p-2'>
+        <Demo />
+      </div>
+    </div>
+  )
+}
+\`\`\``}
+/>
+
+<ViewCode
+  code="'use client'
+
+import Demo from './components/demo.tsx'
+
+export default function Foo() {
+  return (
+    <div className=&#x22;border-4 border-solid rounded p-2&#x22;>This is a Foo 
+      <div className='border-4 border-solid rounded p-2'>
+        <Demo />
+      </div>
+    </div>
+  )
+
+}"
+  component={<ViewCodeTempComponent_2 />}
+/>
+
+
 # Components
 
 
@@ -19,10 +149,7 @@ import ToggleTheme from './components/toggle-theme.tsx'
 A link button component to link url and show text.
 
 ```mdx
-<LinkButton
-  url="https://github.com/showlotus/fumadocs-template"
-  text="Github"
-/>
+<LinkButton url="https://github.com/showlotus/fumadocs-template" text="Github" />
 ```
 
 <LinkButton url="https://github.com/showlotus/fumadocs-template" text="Github" />
@@ -42,6 +169,8 @@ click <ToggleTheme /> to toggle theme and the icon will change.
 ## CodeBlock
 
 A component to show code block.
+
+{/* prettier-ignore */}
 
 ```mdx
 <CodeBlock lang="tsx" code={`'use client'
