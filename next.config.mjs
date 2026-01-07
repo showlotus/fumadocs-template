@@ -21,7 +21,7 @@ const config = {
   },
   ...(process.env.NODE_ENV === 'production'
     ? {
-        basePath: withBasePath('/'), // 仓库名
+        basePath: withBasePath(''), // 仓库名
         assetPrefix: withBasePath('/'), // 资源路径前缀
       }
     : {}),
