@@ -5,6 +5,12 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@orama/orama':
+    specifier: ^3.1.18
+    version: 3.1.18
+  '@orama/tokenizers':
+    specifier: ^3.1.18
+    version: 3.1.18
   ahooks:
     specifier: ^3.9.6
     version: 3.9.6(react-dom@19.2.3)(react@19.2.3)
@@ -1083,6 +1089,13 @@ packages:
   /@orama/orama@3.1.18:
     resolution: {integrity: sha512-a61ljmRVVyG5MC/698C8/FfFDw5a8LOIvyOLW5fztgUXqUpc1jOfQzOitSCbge657OgXXThmY3Tk8fpiDb4UcA==}
     engines: {node: '>= 20.0.0'}
+    dev: false
+
+  /@orama/tokenizers@3.1.18:
+    resolution: {integrity: sha512-Ra4dFddWZ7hCGPAehnd/6QZjlzQvczYSt1y1Fq4HteJqRu2yvfR6fXvxiUnKi+HIgJYPxKhebJEjvJdF8LYQWg==}
+    engines: {node: '>= 20.0.0'}
+    dependencies:
+      '@orama/orama': 3.1.18
     dev: false
 
   /@radix-ui/number@1.1.1:
