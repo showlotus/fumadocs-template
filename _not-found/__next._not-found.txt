@@ -1,4 +1,4 @@
 1:"$Sreact.fragment"
 2:I[870261,["/fumadocs-template/_next/static/chunks/1c9d8e3f91a008c6.js","/fumadocs-template/_next/static/chunks/887cf386998da47e.js"],"default"]
 3:I[12797,["/fumadocs-template/_next/static/chunks/1c9d8e3f91a008c6.js","/fumadocs-template/_next/static/chunks/887cf386998da47e.js"],"default"]
-0:{"buildId":"I5CLzwQ1927e2XOtjPfcz","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"GQk8SdaQFJdU95v0E0tOp","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
