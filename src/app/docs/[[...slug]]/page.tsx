@@ -1,5 +1,11 @@
 import { getPageImage, source } from '@/lib/source'
-import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/layouts/docs/page'
+import {
+  DocsBody,
+  DocsDescription,
+  DocsPage,
+  DocsTitle,
+  PageLastUpdate,
+} from 'fumadocs-ui/layouts/docs/page'
 import { notFound } from 'next/navigation'
 import { getMDXComponents } from '@/mdx-components'
 import type { Metadata } from 'next'
@@ -11,6 +17,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   if (!page) notFound()
 
   const MDX = page.data.body
+  const { lastModified } = page.data
 
   return (
     <DocsPage toc={page.data.toc} full={page.data.full}>
@@ -24,6 +31,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
           })}
         />
       </DocsBody>
+      {lastModified && <PageLastUpdate date={lastModified} />}
     </DocsPage>
   )
 }
