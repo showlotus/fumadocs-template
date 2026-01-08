@@ -13,6 +13,8 @@ export function remarkViewCode(options?: { root?: string }) {
     const dir = path.dirname(file.path)
     const tasks: any[] = []
 
+    const ROOT_CACHE_DIR = '.next/view-code-cache'
+
     visit(tree, 'mdxJsxFlowElement', (node: any) => {
       if (node.name !== displayName) return
 
@@ -35,7 +37,7 @@ export function remarkViewCode(options?: { root?: string }) {
       node.attributes.push(generateJsxAttribute('component', varName))
 
       // 注入组件源码
-      const CACHE_DIR = '.dev/view-code-cache/virtual'
+      const CACHE_DIR = `${ROOT_CACHE_DIR}/virtual`
       const cacheDir = path.resolve(root, CACHE_DIR)
       if (!fs.existsSync(cacheDir)) {
         fs.mkdirSync(cacheDir, { recursive: true })
@@ -78,7 +80,7 @@ export function remarkViewCode(options?: { root?: string }) {
       }
 
       // 创建文件夹
-      const CACHE_DIR = '.dev/view-code-cache/temps'
+      const CACHE_DIR = `${ROOT_CACHE_DIR}/temps`
       const cacheDir = path.resolve(root, CACHE_DIR)
       const fileName = `${varName}.tsx`
       if (!fs.existsSync(cacheDir)) {
