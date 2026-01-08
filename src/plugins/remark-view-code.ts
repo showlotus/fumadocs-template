@@ -13,7 +13,7 @@ export function remarkViewCode(options?: { root?: string }) {
     const dir = path.dirname(file.path)
     const tasks: any[] = []
 
-    const ROOT_CACHE_DIR = '.next/view-code-cache'
+    const ROOT_CACHE_DIR = '.dev/view-code-cache'
 
     visit(tree, 'mdxJsxFlowElement', (node: any) => {
       if (node.name !== displayName) return
