@@ -7,15 +7,29 @@ import { rewriteImportSource } from '@/lib/path'
 
 export function remarkViewCode(options?: { root?: string }) {
   const { root = process.cwd() } = options ?? {}
-  let componentIdx = 0
-  let virtualIdx = 0
-  let sourceCodeIdx = 0
+
+  let tempFileIdx = 0
+  let virtualFileIdx = 0
+  const tempFileIndexMap: Record<string, number> = {}
+  const virtualFileIndexMap: Record<string, number> = {}
+
   return (tree: any, file: any) => {
     const imports: any[] = []
     const dir = path.dirname(file.path)
     const tasks: any[] = []
 
+    let componentIdx = 0
+    let sourceCodeIdx = 0
+    let virtualIdx = 0
+    let tempIdx = 0
+
     const ROOT_CACHE_DIR = '.dev/view-code-cache'
+
+    // 初始化为 0
+    tempFileIndexMap[file.path] ??= tempFileIdx++
+    virtualFileIndexMap[file.path] ??= virtualFileIdx++
+
+    console.log(file.path, tempFileIndexMap[file.path], virtualFileIndexMap[file.path])
 
     visit(tree, 'mdxJsxFlowElement', (node: any) => {
       if (node.name !== displayName) return
@@ -27,7 +41,9 @@ export function remarkViewCode(options?: { root?: string }) {
 
       const absolutePath = path.resolve(dir, srcAttr.value)
       const importPath = './' + path.relative(dir, absolutePath)
-      const varName = `${displayName}ActualComponent${componentIdx++}`
+      const varName = `${displayName}ActualComponent_${
+        tempFileIndexMap[file.path]
+      }_${componentIdx++}`
 
       // 记录 import 语句
       imports.push({ varName, importPath })
@@ -44,7 +60,9 @@ export function remarkViewCode(options?: { root?: string }) {
       if (!fs.existsSync(cacheDir)) {
         fs.mkdirSync(cacheDir, { recursive: true })
       }
-      const cacheFileName = `${displayName}VirtualComponent${virtualIdx++}.tsx.virtual`
+      const cacheFileName = `${displayName}VirtualComponent_${
+        virtualFileIndexMap[file.path]
+      }_${virtualIdx++}`
       const cacheFilePath = path.resolve(cacheDir, cacheFileName)
       const relativeCacheDirPath = path.relative(dir, cacheDir)
       if (fs.existsSync(cacheFilePath)) {
@@ -61,7 +79,7 @@ export function remarkViewCode(options?: { root?: string }) {
       if (!node.meta) return
       if (!node.meta.includes('view-code')) return
 
-      const varName = `ViewCodeTempComponent${componentIdx++}`
+      const varName = `ViewCodeTempComponent_${tempFileIndexMap[file.path]}_${tempIdx++}`
       tasks.push({ varName, node, index, parent })
     })
 

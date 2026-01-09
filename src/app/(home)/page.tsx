@@ -14,6 +14,11 @@ export default function HomePage() {
       </p>
 
       <Cards className="mt-8 flex justify-center">
+        <Card title="Chinese" href="/docs/cn/components" />
+        <Card title="English" href="/docs/en/components" />
+      </Cards>
+
+      <Cards className="mt-8 flex justify-center">
         <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
         <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
       </Cards>
