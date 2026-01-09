@@ -2,6 +2,24 @@
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
 
+:root {
+  --cn-color: hsl(41, 100%, 40%);
+  --en-color: hsl(217, 100%, 58%);
+}
+
+.dark {
+  --cn-color: #fff383;
+  --en-color: #a9ceff;
+}
+
+.en {
+  --color-fd-primary: var(--en-color);
+}
+
+.cn {
+  --color-fd-primary: var(--cn-color);
+}
+
 /* 设置 Tab 下的 Code 面板的背景色 */
 .view-code-container div[role='tabpanel'][id*='code'] figure {
   background-color: transparent;

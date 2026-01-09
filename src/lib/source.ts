@@ -11,6 +11,18 @@ export const source = loader({
   plugins: ({ typedPlugin }) => [lucideIconsPlugin()],
 })
 
+export function getSection(path: string | undefined) {
+  if (!path) return 'en'
+  const [dir] = path.split('/', 1)
+  if (!dir) return 'en'
+  return (
+    {
+      cn: 'cn',
+      en: 'en',
+    }[dir] ?? 'en'
+  )
+}
+
 export function getPageImage(page: InferPageType<typeof source>) {
   const segments = [...page.slugs, 'image.png']
 

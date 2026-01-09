@@ -159,3 +159,4 @@ rehypeCodeOptions: {
 - [Next.js 文档](https://nextjs.org/docs)
 - [MDX 文档](https://mdxjs.com)
 - [Tailwind CSS](https://tailwindcss.com)
+- [Lucide Icons](https://lucide.dev/icons/)

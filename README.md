@@ -157,3 +157,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Next.js Documentation](https://nextjs.org/docs)
 - [MDX Documentation](https://mdxjs.com)
 - [Tailwind CSS](https://tailwindcss.com)
+- [Lucide Icons](https://lucide.dev/icons/)
