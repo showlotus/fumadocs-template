@@ -6,8 +6,9 @@ import { useParams } from 'next/navigation'
 import SearchDialog from '@/components/search'
 import { cn } from '@/lib/cn'
 import type { ReactNode } from 'react'
-import './global.css'
 import { getSection } from '@/lib/source'
+
+import './global.css'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -27,6 +28,7 @@ export function useMode(): string | undefined {
 export default function Layout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>
+      <title>Fumadocs Template</title>
       <Body>
         <RootProvider
           search={{
