@@ -8,28 +8,37 @@ import { rewriteImportSource } from '@/lib/path'
 export function remarkViewCode(options?: { root?: string }) {
   const { root = process.cwd() } = options ?? {}
 
-  let tempFileIdx = 0
-  let virtualFileIdx = 0
-  const tempFileIndexMap: Record<string, number> = {}
-  const virtualFileIndexMap: Record<string, number> = {}
+  const tempFileNameIndexMap = new Map<string, number>()
+  const virtualFileNameIndexMap = new Map<string, number>()
+
+  // 创建缓存目录
+  const ROOT_CACHE_DIR = '.dev/view-code-cache'
+  const TEMP_CACHE_DIR = `${ROOT_CACHE_DIR}/temp`
+  const VIRTUAL_CACHE_DIR = `${ROOT_CACHE_DIR}/virtual`
+  ;[TEMP_CACHE_DIR, VIRTUAL_CACHE_DIR].forEach((dir: string) => {
+    const cacheDir = path.resolve(root, dir)
+    if (!fs.existsSync(cacheDir)) {
+      fs.mkdirSync(cacheDir, { recursive: true })
+    }
+  })
 
   return (tree: any, file: any) => {
     const imports: any[] = []
     const dir = path.dirname(file.path)
     const tasks: any[] = []
 
-    let componentIdx = 0
-    let sourceCodeIdx = 0
     let virtualIdx = 0
     let tempIdx = 0
 
-    const ROOT_CACHE_DIR = '.dev/view-code-cache'
+    let componentVarNameIdx = 0
 
-    // 初始化为 0
-    tempFileIndexMap[file.path] ??= tempFileIdx++
-    virtualFileIndexMap[file.path] ??= virtualFileIdx++
-
-    console.log(file.path, tempFileIndexMap[file.path], virtualFileIndexMap[file.path])
+    // 初始化文件索引
+    if (!tempFileNameIndexMap.has(file.path)) {
+      tempFileNameIndexMap.set(file.path, tempFileNameIndexMap.size + 1)
+    }
+    if (!virtualFileNameIndexMap.has(file.path)) {
+      virtualFileNameIndexMap.set(file.path, virtualFileNameIndexMap.size + 1)
+    }
 
     visit(tree, 'mdxJsxFlowElement', (node: any) => {
       if (node.name !== displayName) return
@@ -41,9 +50,7 @@ export function remarkViewCode(options?: { root?: string }) {
 
       const absolutePath = path.resolve(dir, srcAttr.value)
       const importPath = './' + path.relative(dir, absolutePath)
-      const varName = `${displayName}ActualComponent_${
-        tempFileIndexMap[file.path]
-      }_${componentIdx++}`
+      const varName = `${displayName}ActualComponent${componentVarNameIdx++}`
 
       // 记录 import 语句
       imports.push({ varName, importPath })
@@ -55,14 +62,10 @@ export function remarkViewCode(options?: { root?: string }) {
       node.attributes.push(generateJsxAttribute('component', varName))
 
       // 注入组件源码
-      const CACHE_DIR = `${ROOT_CACHE_DIR}/virtual`
-      const cacheDir = path.resolve(root, CACHE_DIR)
-      if (!fs.existsSync(cacheDir)) {
-        fs.mkdirSync(cacheDir, { recursive: true })
-      }
-      const cacheFileName = `${displayName}VirtualComponent_${
-        virtualFileIndexMap[file.path]
-      }_${virtualIdx++}`
+      const cacheDir = path.resolve(root, VIRTUAL_CACHE_DIR)
+      const cacheFileName = `${displayName}VirtualComponent_${virtualFileNameIndexMap.get(
+        file.path,
+      )}_${virtualIdx++}.tsx.virtual`
       const cacheFilePath = path.resolve(cacheDir, cacheFileName)
       const relativeCacheDirPath = path.relative(dir, cacheDir)
       if (fs.existsSync(cacheFilePath)) {
@@ -70,16 +73,16 @@ export function remarkViewCode(options?: { root?: string }) {
       }
       fs.linkSync(absolutePath, cacheFilePath)
       const sourceCodePath = path.join(relativeCacheDirPath, cacheFileName)
-      const sourceCodeName = `${displayName}ComponentSourceCode${sourceCodeIdx++}`
-      imports.push({ varName: sourceCodeName, importPath: sourceCodePath })
-      node.attributes.push(generateExpressionAttribute('code', sourceCodeName))
+      const sourceCodeVarName = `${displayName}ComponentSourceCode${componentVarNameIdx++}`
+      imports.push({ varName: sourceCodeVarName, importPath: sourceCodePath })
+      node.attributes.push(generateExpressionAttribute('code', sourceCodeVarName))
     })
 
     visit(tree, 'code', (node, index, parent) => {
       if (!node.meta) return
       if (!node.meta.includes('view-code')) return
 
-      const varName = `ViewCodeTempComponent_${tempFileIndexMap[file.path]}_${tempIdx++}`
+      const varName = `${displayName}TempComponent${componentVarNameIdx++}`
       tasks.push({ varName, node, index, parent })
     })
 
@@ -99,23 +102,18 @@ export function remarkViewCode(options?: { root?: string }) {
         ],
       }
 
-      // 创建文件夹
-      const CACHE_DIR = `${ROOT_CACHE_DIR}/temps`
-      const cacheDir = path.resolve(root, CACHE_DIR)
-      const fileName = `${varName}.tsx`
-      if (!fs.existsSync(cacheDir)) {
-        fs.mkdirSync(cacheDir, { recursive: true })
-      }
+      // 生成文件路径
+      const cacheDir = path.resolve(root, TEMP_CACHE_DIR)
+      const fileName = `${displayName}TempComponent_${tempFileNameIndexMap.get(
+        file.path,
+      )}_${tempIdx++}.tsx`
+      const filePath = path.resolve(cacheDir, fileName)
 
       // 将 code 中的 import 路径转换为相对 cache 目录的路径
-      const code = rewriteImportSource(
-        node.value,
-        file.path,
-        path.resolve(root, CACHE_DIR, fileName),
-      )
+      const code = rewriteImportSource(node.value, file.path, filePath)
 
       // 创建组件文件
-      fs.writeFileSync(path.resolve(cacheDir, fileName), code)
+      fs.writeFileSync(filePath, code)
       const relativeCacheDirPath = path.relative(dir, cacheDir)
       const sourceCodePath = path.join(relativeCacheDirPath, fileName)
       imports.push({ varName, importPath: sourceCodePath })
