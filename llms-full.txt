@@ -16,8 +16,6 @@ import ToggleTheme from '../components/toggle-theme.tsx'
 
 ## LinkButton
 
-12
-
 链接按钮组件，用于链接 URL 并显示文本。
 
 ```mdx
@@ -283,8 +281,6 @@ export default function Foo() {
 import ToggleTheme from '../components/toggle-theme.tsx'
 
 ## LinkButton
-
-12
 
 链接按钮组件，用于链接 URL 并显示文本。
 
