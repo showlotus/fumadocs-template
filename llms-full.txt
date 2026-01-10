@@ -12,9 +12,11 @@
 
 
 
-import ToggleTheme from './components/toggle-theme.tsx'
+import ToggleTheme from '../components/toggle-theme.tsx'
 
 ## LinkButton
+
+12
 
 链接按钮组件，用于链接 URL 并显示文本。
 
@@ -29,7 +31,7 @@ import ToggleTheme from './components/toggle-theme.tsx'
 图片组件，用于在亮色和暗色模式下显示不同的图片。
 
 ```mdx
-<ThemeImage light="./imgs/sun.svg" dark="./imgs/moon.svg" className="w-10" />
+<ThemeImage light="../images/sun.svg" dark="../images/moon.svg" className="w-10" />
 ```
 
 点击 <ToggleTheme /> 切换主题，图标会随之变化。
@@ -45,7 +47,7 @@ import ToggleTheme from './components/toggle-theme.tsx'
 ```mdx
 <CodeBlock lang="tsx" code={`'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
     return <div>This is a Foo with <Demo /></div>
@@ -56,7 +58,7 @@ export default function Foo() {
   lang="tsx"
   code={`'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
   return <div>This is a Foo with <Demo /></div>
@@ -70,7 +72,7 @@ export default function Foo() {
   code={`\`\`\`mdx
 'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
   return <div>This is a Foo with <Demo /></div>
@@ -83,10 +85,10 @@ export default function Foo() {
 既能渲染指定组件也能查看其源代码的组件。
 
 ```mdx
-<ViewCode src="./components/demo.tsx" />
+<ViewCode src="../components/demo.tsx" />
 ```
 
-<ViewCode component={<ViewCodeComponent_0 />} code={ViewCodeComponentSourceCode_1} />
+<ViewCode component={<ViewCodeActualComponent0 />} code={ViewCodeComponentSourceCode1} />
 
 或者使用 `view-code` 关键字来注入到代码块中：
 
@@ -95,11 +97,12 @@ export default function Foo() {
   code={`\`\`\`mdx view-code
 'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
   return (
-    <div className="border-4 border-solid rounded p-2">This is a Foo 
+    <div className="border-4 border-solid rounded p-2">
+      This is a Foo 
       <div className='border-4 border-solid rounded p-2'>
         <Demo />
       </div>
@@ -109,22 +112,24 @@ export default function Foo() {
 \`\`\``}
 />
 
+{/* prettier-ignore */}
+
 <ViewCode
   code="'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
   return (
-    <div className=&#x22;border-4 border-solid rounded p-2&#x22;>This is a Foo 
-      <div className='border-4 border-solid rounded p-2'>
+    <div className=&#x22;border-4 border-solid rounded p-2&#x22;>
+      This is a Foo
+      <div className=&#x22;border-4 border-solid rounded p-2&#x22;>
         <Demo />
       </div>
     </div>
   )
-
 }"
-  component={<ViewCodeTempComponent_2 />}
+  component={<ViewCodeTempComponent2 />}
 />
 
 
@@ -142,7 +147,7 @@ export default function Foo() {
 
 
 
-import ToggleTheme from './components/toggle-theme.tsx'
+import ToggleTheme from '../components/toggle-theme.tsx'
 
 ## LinkButton
 
@@ -159,7 +164,7 @@ A link button component to link url and show text.
 A image component to show different image in light and dark mode.
 
 ```mdx
-<ThemeImage light="./imgs/sun.svg" dark="./imgs/moon.svg" className="w-10" />
+<ThemeImage light="../images/sun.svg" dark="../images/moon.svg" className="w-10" />
 ```
 
 click <ToggleTheme /> to toggle theme and the icon will change.
@@ -175,7 +180,7 @@ A component to show code block.
 ```mdx
 <CodeBlock lang="tsx" code={`'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
     return <div>This is a Foo with <Demo /></div>
@@ -186,7 +191,7 @@ export default function Foo() {
   lang="tsx"
   code={`'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
   return <div>This is a Foo with <Demo /></div>
@@ -200,7 +205,7 @@ It's the same as:
   code={`\`\`\`mdx
 'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
   return <div>This is a Foo with <Demo /></div>
@@ -213,10 +218,10 @@ export default function Foo() {
 A component to view code.
 
 ```mdx
-<ViewCode src="./components/demo.tsx" />
+<ViewCode src="../components/demo.tsx" />
 ```
 
-<ViewCode component={<ViewCodeComponent_0 />} code={ViewCodeComponentSourceCode_1} />
+<ViewCode component={<ViewCodeActualComponent0 />} code={ViewCodeComponentSourceCode1} />
 
 or use `view-code` keyword to inject the code block.
 
@@ -225,11 +230,12 @@ or use `view-code` keyword to inject the code block.
   code={`\`\`\`mdx view-code
 'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
   return (
-    <div className="border-4 border-solid rounded p-2">This is a Foo 
+    <div className="border-4 border-solid rounded p-2">
+      This is a Foo
       <div className='border-4 border-solid rounded p-2'>
         <Demo />
       </div>
@@ -239,21 +245,24 @@ export default function Foo() {
 \`\`\``}
 />
 
+{/* prettier-ignore */}
+
 <ViewCode
   code="'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
   return (
-    <div className=&#x22;border-4 border-solid rounded p-2&#x22;>This is a Foo 
-      <div className='border-4 border-solid rounded p-2'>
+    <div className=&#x22;border-4 border-solid rounded p-2&#x22;>
+      This is a Foo
+      <div className=&#x22;border-4 border-solid rounded p-2&#x22;>
         <Demo />
       </div>
     </div>
   )
 }"
-  component={<ViewCodeTempComponent_2 />}
+  component={<ViewCodeTempComponent2 />}
 />
 
 
@@ -271,9 +280,11 @@ export default function Foo() {
 
 
 
-import ToggleTheme from './components/toggle-theme.tsx'
+import ToggleTheme from '../components/toggle-theme.tsx'
 
 ## LinkButton
+
+12
 
 链接按钮组件，用于链接 URL 并显示文本。
 
@@ -288,7 +299,7 @@ import ToggleTheme from './components/toggle-theme.tsx'
 图片组件，用于在亮色和暗色模式下显示不同的图片。
 
 ```mdx
-<ThemeImage light="./imgs/sun.svg" dark="./imgs/moon.svg" className="w-10" />
+<ThemeImage light="../images/sun.svg" dark="../images/moon.svg" className="w-10" />
 ```
 
 点击 <ToggleTheme /> 切换主题，图标会随之变化。
@@ -304,7 +315,7 @@ import ToggleTheme from './components/toggle-theme.tsx'
 ```mdx
 <CodeBlock lang="tsx" code={`'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
     return <div>This is a Foo with <Demo /></div>
@@ -315,7 +326,7 @@ export default function Foo() {
   lang="tsx"
   code={`'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
   return <div>This is a Foo with <Demo /></div>
@@ -329,7 +340,7 @@ export default function Foo() {
   code={`\`\`\`mdx
 'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
   return <div>This is a Foo with <Demo /></div>
@@ -342,10 +353,10 @@ export default function Foo() {
 既能渲染指定组件也能查看其源代码的组件。
 
 ```mdx
-<ViewCode src="./components/demo.tsx" />
+<ViewCode src="../components/demo.tsx" />
 ```
 
-<ViewCode component={<ViewCodeComponent_0 />} code={ViewCodeComponentSourceCode_1} />
+<ViewCode component={<ViewCodeActualComponent0 />} code={ViewCodeComponentSourceCode1} />
 
 或者使用 `view-code` 关键字来注入到代码块中：
 
@@ -354,11 +365,12 @@ export default function Foo() {
   code={`\`\`\`mdx view-code
 'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
   return (
-    <div className="border-4 border-solid rounded p-2">This is a Foo 
+    <div className="border-4 border-solid rounded p-2">
+      This is a Foo 
       <div className='border-4 border-solid rounded p-2'>
         <Demo />
       </div>
@@ -368,22 +380,24 @@ export default function Foo() {
 \`\`\``}
 />
 
+{/* prettier-ignore */}
+
 <ViewCode
   code="'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
   return (
-    <div className=&#x22;border-4 border-solid rounded p-2&#x22;>This is a Foo 
-      <div className='border-4 border-solid rounded p-2'>
+    <div className=&#x22;border-4 border-solid rounded p-2&#x22;>
+      This is a Foo
+      <div className=&#x22;border-4 border-solid rounded p-2&#x22;>
         <Demo />
       </div>
     </div>
   )
-
 }"
-  component={<ViewCodeTempComponent_2 />}
+  component={<ViewCodeTempComponent2 />}
 />
 
 
@@ -401,7 +415,7 @@ export default function Foo() {
 
 
 
-import ToggleTheme from './components/toggle-theme.tsx'
+import ToggleTheme from '../components/toggle-theme.tsx'
 
 ## LinkButton
 
@@ -418,7 +432,7 @@ A link button component to link url and show text.
 A image component to show different image in light and dark mode.
 
 ```mdx
-<ThemeImage light="./imgs/sun.svg" dark="./imgs/moon.svg" className="w-10" />
+<ThemeImage light="../images/sun.svg" dark="../images/moon.svg" className="w-10" />
 ```
 
 click <ToggleTheme /> to toggle theme and the icon will change.
@@ -434,7 +448,7 @@ A component to show code block.
 ```mdx
 <CodeBlock lang="tsx" code={`'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
     return <div>This is a Foo with <Demo /></div>
@@ -445,7 +459,7 @@ export default function Foo() {
   lang="tsx"
   code={`'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
   return <div>This is a Foo with <Demo /></div>
@@ -459,7 +473,7 @@ It's the same as:
   code={`\`\`\`mdx
 'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
   return <div>This is a Foo with <Demo /></div>
@@ -472,10 +486,10 @@ export default function Foo() {
 A component to view code.
 
 ```mdx
-<ViewCode src="./components/demo.tsx" />
+<ViewCode src="../components/demo.tsx" />
 ```
 
-<ViewCode component={<ViewCodeComponent_0 />} code={ViewCodeComponentSourceCode_1} />
+<ViewCode component={<ViewCodeActualComponent0 />} code={ViewCodeComponentSourceCode1} />
 
 or use `view-code` keyword to inject the code block.
 
@@ -484,11 +498,12 @@ or use `view-code` keyword to inject the code block.
   code={`\`\`\`mdx view-code
 'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
   return (
-    <div className="border-4 border-solid rounded p-2">This is a Foo 
+    <div className="border-4 border-solid rounded p-2">
+      This is a Foo
       <div className='border-4 border-solid rounded p-2'>
         <Demo />
       </div>
@@ -498,19 +513,22 @@ export default function Foo() {
 \`\`\``}
 />
 
+{/* prettier-ignore */}
+
 <ViewCode
   code="'use client'
 
-import Demo from './components/demo.tsx'
+import Demo from '../components/demo.tsx'
 
 export default function Foo() {
   return (
-    <div className=&#x22;border-4 border-solid rounded p-2&#x22;>This is a Foo 
-      <div className='border-4 border-solid rounded p-2'>
+    <div className=&#x22;border-4 border-solid rounded p-2&#x22;>
+      This is a Foo
+      <div className=&#x22;border-4 border-solid rounded p-2&#x22;>
         <Demo />
       </div>
     </div>
   )
 }"
-  component={<ViewCodeTempComponent_2 />}
+  component={<ViewCodeTempComponent2 />}
 />
