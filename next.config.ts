@@ -1,12 +1,12 @@
 import { createMDX } from 'fumadocs-mdx/next'
-import { withBasePath } from './src/lib/env.mjs'
+import { withBasePath } from '@/lib/env'
 
 const withMDX = createMDX()
 
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
-  output: 'export', // ⭐ 必须
+  output: 'export' as const, // ⭐ 必须
   images: {
     unoptimized: true, // GitHub Pages 不支持 Image 优化
   },

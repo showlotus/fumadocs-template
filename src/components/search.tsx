@@ -19,7 +19,7 @@ import { ChevronDown } from 'lucide-react'
 import { create } from '@orama/orama'
 import { createTokenizer } from '@orama/tokenizers/mandarin'
 import { useI18n } from 'fumadocs-ui/contexts/i18n'
-import { withBasePath } from '@/lib/env.mjs'
+import { withBasePath } from '@/lib/env'
 import { useState } from 'react'
 import { cn } from '@/lib/cn'
 
