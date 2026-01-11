@@ -10,8 +10,6 @@
 
 
 
-
-
 import ToggleTheme from '../components/toggle-theme.tsx'
 
 ## LinkButton
@@ -86,7 +84,7 @@ export default function Foo() {
 <ViewCode src="../components/demo.tsx" />
 ```
 
-<ViewCode component={<ViewCodeActualComponent0 />} code={ViewCodeComponentSourceCode1} />
+<ViewCode component={<ViewCodeActualComponent0 />} code={"'use client'\n\nimport ThemeToggle from './toggle-theme'\n\nexport default function Demo() {\n  return (\n    <div className=\"flex flex-col gap-2\">\n      <div>This is a Demo</div>\n      <div>\n        click <ThemeToggle /> to toggle theme and the icon will change.\n      </div>\n    </div>\n  )\n}\n"} />
 
 或者使用 `view-code` 关键字来注入到代码块中：
 
@@ -127,13 +125,11 @@ export default function Foo() {
     </div>
   )
 }"
-  component={<ViewCodeTempComponent2 />}
+  component={<ViewCodeTempComponent1 />}
 />
 
 
 # Components
-
-
 
 
 
@@ -219,7 +215,7 @@ A component to view code.
 <ViewCode src="../components/demo.tsx" />
 ```
 
-<ViewCode component={<ViewCodeActualComponent0 />} code={ViewCodeComponentSourceCode1} />
+<ViewCode component={<ViewCodeActualComponent0 />} code={"'use client'\n\nimport ThemeToggle from './toggle-theme'\n\nexport default function Demo() {\n  return (\n    <div className=\"flex flex-col gap-2\">\n      <div>This is a Demo</div>\n      <div>\n        click <ThemeToggle /> to toggle theme and the icon will change.\n      </div>\n    </div>\n  )\n}\n"} />
 
 or use `view-code` keyword to inject the code block.
 
@@ -260,7 +256,7 @@ export default function Foo() {
     </div>
   )
 }"
-  component={<ViewCodeTempComponent2 />}
+  component={<ViewCodeTempComponent1 />}
 />
 
 
@@ -276,8 +272,6 @@ export default function Foo() {
 
 
 
-
-
 import ToggleTheme from '../components/toggle-theme.tsx'
 
 ## LinkButton
@@ -352,7 +346,7 @@ export default function Foo() {
 <ViewCode src="../components/demo.tsx" />
 ```
 
-<ViewCode component={<ViewCodeActualComponent0 />} code={ViewCodeComponentSourceCode1} />
+<ViewCode component={<ViewCodeActualComponent0 />} code={"'use client'\n\nimport ThemeToggle from './toggle-theme'\n\nexport default function Demo() {\n  return (\n    <div className=\"flex flex-col gap-2\">\n      <div>This is a Demo</div>\n      <div>\n        click <ThemeToggle /> to toggle theme and the icon will change.\n      </div>\n    </div>\n  )\n}\n"} />
 
 或者使用 `view-code` 关键字来注入到代码块中：
 
@@ -393,13 +387,11 @@ export default function Foo() {
     </div>
   )
 }"
-  component={<ViewCodeTempComponent2 />}
+  component={<ViewCodeTempComponent1 />}
 />
 
 
 # Components
-
-
 
 
 
@@ -485,7 +477,7 @@ A component to view code.
 <ViewCode src="../components/demo.tsx" />
 ```
 
-<ViewCode component={<ViewCodeActualComponent0 />} code={ViewCodeComponentSourceCode1} />
+<ViewCode component={<ViewCodeActualComponent0 />} code={"'use client'\n\nimport ThemeToggle from './toggle-theme'\n\nexport default function Demo() {\n  return (\n    <div className=\"flex flex-col gap-2\">\n      <div>This is a Demo</div>\n      <div>\n        click <ThemeToggle /> to toggle theme and the icon will change.\n      </div>\n    </div>\n  )\n}\n"} />
 
 or use `view-code` keyword to inject the code block.
 
@@ -526,5 +518,5 @@ export default function Foo() {
     </div>
   )
 }"
-  component={<ViewCodeTempComponent2 />}
+  component={<ViewCodeTempComponent1 />}
 />
