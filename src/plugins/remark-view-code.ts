@@ -62,20 +62,24 @@ export function remarkViewCode(options?: { root?: string }) {
       node.attributes.push(generateJsxAttribute('component', varName))
 
       // 注入组件源码
-      const cacheDir = path.resolve(root, VIRTUAL_CACHE_DIR)
-      const cacheFileName = `${displayName}VirtualComponent_${virtualFileNameIndexMap.get(
-        file.path,
-      )}_${virtualIdx++}.tsx.virtual`
-      const cacheFilePath = path.resolve(cacheDir, cacheFileName)
-      const relativeCacheDirPath = path.relative(dir, cacheDir)
-      if (fs.existsSync(cacheFilePath)) {
-        fs.unlinkSync(cacheFilePath)
+      if (process.env.NODE_ENV === 'development') {
+        const cacheDir = path.resolve(root, VIRTUAL_CACHE_DIR)
+        const cacheFileName = `${displayName}VirtualComponent_${virtualFileNameIndexMap.get(
+          file.path,
+        )}_${virtualIdx++}.tsx.virtual`
+        const cacheFilePath = path.resolve(cacheDir, cacheFileName)
+        const relativeCacheDirPath = path.relative(dir, cacheDir)
+        if (!fs.existsSync(cacheFilePath)) {
+          fs.linkSync(absolutePath, cacheFilePath)
+        }
+        const sourceCodePath = path.join(relativeCacheDirPath, cacheFileName)
+        const sourceCodeVarName = `${displayName}ComponentSourceCode${componentVarNameIdx++}`
+        imports.push({ varName: sourceCodeVarName, importPath: sourceCodePath })
+        node.attributes.push(generateExpressionAttribute('code', sourceCodeVarName))
+      } else {
+        const sourceCode = fs.readFileSync(absolutePath, 'utf-8')
+        node.attributes.push(generateExpressionAttribute('code', JSON.stringify(sourceCode)))
       }
-      fs.linkSync(absolutePath, cacheFilePath)
-      const sourceCodePath = path.join(relativeCacheDirPath, cacheFileName)
-      const sourceCodeVarName = `${displayName}ComponentSourceCode${componentVarNameIdx++}`
-      imports.push({ varName: sourceCodeVarName, importPath: sourceCodePath })
-      node.attributes.push(generateExpressionAttribute('code', sourceCodeVarName))
     })
 
     visit(tree, 'code', (node, index, parent) => {
@@ -119,10 +123,11 @@ export function remarkViewCode(options?: { root?: string }) {
       imports.push({ varName, importPath: sourceCodePath })
     }
 
-    if (imports.length > 0) {
-      tree.children.unshift(
-        ...imports.map(({ varName, importPath }) => generateImport(varName, importPath)),
-      )
+    for (const { varName, importPath } of imports) {
+      const absolutePath = path.resolve(dir, importPath)
+      if (fs.existsSync(absolutePath)) {
+        tree.children.unshift(generateImport(varName, importPath))
+      }
     }
   }
 }
